@@ -1,0 +1,7 @@
+---
+name: lucienrss
+version: 1
+cron:
+ - description: feed
+	url: rss-data/feed.php
+	schedule: every 1 hour, offset 3

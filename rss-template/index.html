@@ -1,0 +1,55 @@
+<?php
+include("rss-template/header.html");
+?>  
+<div class="main">
+  <div class="span12">
+    <div class="span3 offset4 hero-unit">
+      <h1>RSS</h1>
+      <p>The rss for kindle</p>
+    </div>
+    
+  </div>
+
+  <div class="span12">
+    <?php 
+    if(!$_SESSION['id']){
+    ?>
+    <div class="span4 offset3">
+      <form  class="form-horizontal" method="post">
+        <div class="control-group">
+          <label class="control-label" for="inputEmail">Email:</label>
+          <div class="controls">
+            <input class="span3" type="text" id="inputEmail" placeholder="Email" name="username">
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="inputPassword">密码:</label>
+          <div class="controls">
+            <input class="span3" type="password" id="inputPassword" placeholder="Password" name="password">
+          </div>
+        </div>
+        <div class="control-group span4 offset1">
+            <input type="button" id="login" class="btn btn-large btn-success span2" value="登录">
+            <input type="button" id="signup" class="btn btn-large btn-warning span2" value="注册">
+          
+        </div>
+      </form>
+    </div>
+    <?php
+      }
+      else{
+    ?>
+    <div class="btn-group offset4">
+      <a class="btn btn-large" href="?m=feed"><b>feed投递</b></a>
+      <a class="btn btn-large" href="?m=setting"><b>参数设置</b></a>
+      <a class="btn btn-large" href="?m=passwd"><b>密码修改</b></a>
+      <a class="btn btn-large btn-info" href="?m=logout"><b>退出登录</b></a>
+    </div>
+    <?php
+      }
+    ?>
+  </div>
+</div>
+<?php
+include("rss-template/footer.html");
+?>

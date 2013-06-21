@@ -1,0 +1,93 @@
+<?php
+include("rss-template/header.html");
+?>   
+<div class="container-fluid main" >     
+  <div class="row">       
+    <?php
+     include("rss-template/nav.html");
+    ?>     
+    <div class="span7 cont">      
+       
+        <form action="?m=setmake" method="post" class="form-horizontal">
+          <div class="control-group">
+            <label class="control-label span2" for="inputEmail">推送邮箱:</label>
+            <div class="controls">
+              <div class="input-prepend input-append">
+                <?php
+                  $content = $m->settingShow();
+                  echo '<input type="text" class="span2" id="inputEmail" name="emailpre" value='.$content['mail'][0].'>';
+                  echo '<span class="add-on">@</span>';
+                  echo '<select name="emailnext" class="span2">';
+                  echo '<option ';
+                  if($content['mail'][1] == 'free.kindle.com') echo 'selected="selected"';
+                  echo '>free.kindle.com</option>';
+                   echo '<option ';
+                  if($content['mail'][1] == 'kindle.com') echo 'selected="selected"';
+                  echo '>kindle.com</option>';
+                   echo '<option ';
+                  if($content['mail'][1] == 'iduokan.com') echo 'selected="selected"';
+                  echo '>iduokan.com</option>';
+                   echo '<option ';
+                  if($content['mail'][1] == 'kindle.cn') echo 'selected="selected"';
+                  echo '>kindle.cn</option>';
+                  echo '</select>';
+                ?>
+              </div>   
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label span2" for="inputtime">推送时间(每天):</label>
+            <div class="controls">
+              <select class="span4" name="feedtime" id="inputtime">
+                <?php
+                  for($i=0;$i<24;$i++){
+                    if($content['feedtime'] == $i){
+                      echo "<option selected='selected'>".$i."点</option>";
+                    }
+                    else{
+                      echo "<option>".$i."点</option>";
+                    }
+                  }
+                ?>
+              </select>                 
+            </div>
+          </div>
+          <div class="span5 offset1">
+            <input type="submit" class="btn btn-large btn-block" value="保存">
+          </div>    
+        </form>
+      <div class="ps span7">
+        <h4>相关说明</h4>
+        <dl>
+          <dt>推送邮箱<i class="icon-play"></i></dt>
+          <dd>Amazon推送说明：</dd>
+          <dd>
+            <ol>
+              <li>推送功能只对已在Amazon注册kindle的用户有效。</li>
+              <li>根据文件的大小，推送的时间也有长有短。</li>
+              <li>在使用邮件发送功能前，请先将kindlerss@126.com添加进Amazon kindle的<a href="https://www.amazon.com/gp/digital/fiona/manage?ie=UTF8&amp;%2AVersion%2A=1&amp;%2Aentries%2A=0&amp;#pdocSettings" target="_blank">接收邮件列表</a>之中。</li>
+              <li>建议使用free.kindle.com邮箱，这样可以免费下载而无需花费额外的3g传输费用。</li>
+            </ol>
+          </dd>
+          <dd>多看推送说明：</dd>
+          <dd>
+            <ol>
+              <li>新版多看2012支持邮件推送。</li>
+              <li>多看只支持20M以下的文件推送。</li>
+              <li>多看的推送邮箱可以查看多看的home->系统设置->帐号中心里的多看邮箱，如果没看到这个选项，须登录。</li>
+            </ol>
+          </dd>
+        </dl>
+        <dl>
+          <dt>推送时间<i class="icon-play"></i></dt>
+          <dd>
+            只是个大概的时间，系统转换,还有Amazon的转换会花去一部分时间。
+          </dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</div>
+<?php
+include("rss-template/footer.html");
+?>    

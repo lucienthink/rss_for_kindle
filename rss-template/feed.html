@@ -1,0 +1,63 @@
+<?php
+include("rss-template/header.html");
+?>
+<div class="container-fluid main" >     
+  <div class="row">       
+     <?php
+     include("rss-template/nav.html");
+     ?>
+    <div class="cont">
+      <div class="span9">      
+        <form action="?m=feedmake" method="post" class="form-horizontal feed">
+          <div class="control-group">
+            <label class="control-label span2" for="inputUrl">添加 RSS:</label>
+            <div class="controls">
+              <div class="input-append">
+                <input class="span4" type="text" id="inputUrl" name="url" value="">
+                <input type="submit" class="btn btn-inverse" value="提交">
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <a href="?m=hotrss">热门推荐>></a>                          
+            </div>             
+          </div>
+          
+        </form>
+        <div class="span5">              
+          <a class="btn btn-info" href="?m=feedsend">现在就推送！</a>    
+        </div>
+        <?php
+        if($f==1){
+        ?>
+        <div class="span5">
+          <h4>此链接内容无法获取</h4>
+        </div>
+        <?php
+        $content = $this->feedShow();
+        }else{
+          $content = $m->feedShow();
+        }
+        if(count($content)>8){
+        ?>
+        <div class="span5">
+          <span>注意！当推送数目多于8个，将分批发送。</span>
+        </div>
+        <?php
+        }
+        ?>
+      </div>
+      <div class="span7 list">
+        <?php
+
+          for ($i=count($content)-1; $i >=0 ; $i--) { 
+            echo '<blockquote><p>'.$content[$i]['title'].'</p> <small>'.$content[$i]['url'].'&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href="?m=feeddel&id='.$content[$i]['id'].'">>>删除<<</a></small></blockquote>';
+          }
+        ?>
+        
+      </div>
+    </div>
+    
+  </div>
+</div>
+<?php
+include("rss-template/footer.html");
+?>    
